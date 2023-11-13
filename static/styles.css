@@ -1,0 +1,109 @@
+/* by reseting default style */
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+
+.chat-container{
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 400px;
+}
+
+/* Header style*/
+.chat-header,
+.user-header{
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.bot-avatar,
+.user-avatar{
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.bot-name,
+.user-name{
+    font-weight: bold;
+}
+
+/* chat box style */
+.chat-box{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+
+/* style for chat messages */
+.chat-messages{
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.message{
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+.message.you{
+    background-color: #007bff;
+    color: #fff;
+    align-self: flex-end;
+}
+.message.chatbot{
+    background-color: #f0f0f0;
+    color: #333;
+    align-self: flex-start;
+}
+
+/* styles for user input */
+
+.user-input-container{
+    display: flex;
+    align-items: center;
+}
+
+#user-input{
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 8px;
+    outline: none;
+    flex: 1;
+}
+
+#send-button{
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+
+}
+
+#send-button:hover{
+    background-color: #0056b3;
+}

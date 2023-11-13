@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!--adding css style here-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+     
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <img src="{{url_for('static' , filename='bot-avatar.png') }}" alt="Bot Avatar" class="avatar bot-avatar">
+            <span class="bot-name">ChatBot</span>
+        </div>
+        <div class="chat-box">
+            <div class="chat-messages" id="chat-messages">
+                <!----chat messages will be displeayed here-->
+            </div>
+            <div class="user-input-container">
+                <input type="text" id="user-input" placeholder="type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <div class="user-header">
+            <img src="{{url_for('static' , filename='user-avatar.png') }}" alt="user Avatar" class="avatar user-avatar">
+            <span class="user-name">You</span>
+        </div> 
+    </div>
+
+    <script>
+        const chatMessages=document.getElementById('chat-messages');
+        const userInput=document.getElementById('user-input');
+        const sendButton=document.getElementById('send-button');
+
+        sendButton.addEventListener('click' , () => {
+            const userMessage= userInput.value.trim();
+            if (userMessage !== '') {
+                addMessage('You' , userMessage);
+
+                fetch('/get_response', {
+                    method:'POST',
+                    body: new URLSearchParams({user_input: userMessage}),
+                    headers: {
+                        'content-Type': 'application/x-www-form-urlencoded', 
+                    },
+
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    const botResponse = data.response;
+                    addMessage('ChatBot',botResponse);
+                })
+                .catch((error) => console.error(error));
+                userInput.value = '';
+            }
+        });
+        function addMessage(sender, message) {
+            const messageDiv= document.createElement('div');
+            messageDiv.className=`message ${sender.toLowerCase()}`;
+            messageDiv.innerText=`${sender}: ${message}`;
+            chatMessages.appendChild(messageDiv);
+        }
+    </script>
+    
+</body>
+</html>
